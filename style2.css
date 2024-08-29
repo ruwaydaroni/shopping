@@ -5,12 +5,6 @@
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-header {
-	background-color: #404040;
-	color: aqua;
-	display: flex;
-	justify-content: space-between;
-}
 
 nav ul {
 	display: flex;
@@ -32,21 +26,6 @@ nav ul li a {
 	color: aqua;
 }
 
-body {
-	font-family: Arial, sans-serif;
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	background-color: #f0f0f0;
-}
-
-header {
-	background-color: #333;
-	color: white;
-	padding: 1em 0;
-	text-align: center;
-}
-
 header nav ul {
 	list-style: none;
 	padding: 0;
@@ -59,10 +38,26 @@ header nav ul li {
 	margin: 0 15px;
 }
 
-header nav ul li a {
-	color: white;
-	text-decoration: none;
-	font-size: 1.2em;
+.products {
+	background-color: hsl(185, 100%, 86%);
+	margin: 10px;
+}
+
+.products .card {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	justify-content: space-between;
+
+}
+
+.products .card .product1 {
+	flex: 1 1 calc(33.33%, 20px);
+	box-sizing: border-box;
+	padding: 20px;
+	background-color: #000000;
+	border-radius: 10px;
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -88,41 +83,46 @@ header nav ul li a {
 	background-position: center;
 }
 
-.card-container {
-	display: flex;
-	justify-content: space-between;
-	height: fit-content;
-	width: 100%;
-	align-content: center;
-
-
-}
 
 .nav-header {
 	display: none;
 }
 
-@media screen and (min-width: 992px) {
-	.nav-header {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 1px;
 
-	}
-
-	.nav-toggle {
-		transition: all 0.3s linear;
-	}
-
-	.links a {
-		display: block;
-
-	}
+.nav-toggle {
+	transition: all 0.3s linear;
 }
+
+.links a {
+	display: block;
+
+}
+
 
 ul li {
 	display: block
+}
+
+.products {
+	background-color: hsl(185, 100%, 86%);
+	margin: 10px;
+}
+
+.products .card {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	justify-content: space-between;
+
+}
+
+.products .card .product1 {
+	flex: 1 1 calc(33.33%, 20px);
+	box-sizing: border-box;
+	padding: 20px;
+	background-color: #000000;
+	border-radius: 10px;
+	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 @media screen and (min-width: 800px) {
@@ -133,6 +133,7 @@ ul li {
 		justify-content: space-between;
 
 	}
+
 
 	.nav-header {
 		padding: 0;
@@ -159,20 +160,6 @@ ul li {
 
 
 
-.card {
-	background: #868181;
-	padding: 15px;
-	border-radius: 5px;
-	flex: 1;
-	float: right;
-	margin: 20px;
-	height: 200px;
-
-
-
-
-
-}
 
 .controls {
 	position: absolute;
@@ -199,6 +186,7 @@ main {
 	padding: 2em;
 	text-align: center;
 }
+
 
 footer {
 	background-color: #333;

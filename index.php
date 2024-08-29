@@ -56,9 +56,9 @@ require 'db.php';
 
 <section class = "hero">
 <div class="hero">
-                <div class="slides active" style="background-image: url(car1.jfif);"></div>
-                <div class="slide" style="background-image: url(car2.jfif);"></div>
-                <div class="slide" style="background-image: url(car3.jfif);"></div>
+                <div class="slides active" style="background-image: url(images/car1.jpeg);"></div>
+                <div class="slide" style="background-image: url(images/car2.jpeg);"></div>
+                <div class="slide" style="background-image: url(images/car3.jpeg);"></div>
             </div>
             <div class="controls">
                 <button id="prev">Previous</button>
@@ -67,6 +67,47 @@ require 'db.php';
  
 </section>
 <section class = "products">
+    <h1>top products</h1>
+    <div class="cards">
+     <div class="product1">
+        <div class="image">
+            <img src="car1.jpeg">
+        </div>
+         <div class="text">
+            <h1>car</h1>
+            <p>Lorem ipsum dolor sit amet.</p>
+         </div>
+     </div> 
+     <div class="product1">
+        <div class="image">
+            <img src="car1.jpeg">
+        </div>
+         <div class="text">
+            <h1>car</h1>
+            <p>Lorem ipsum dolor sit amet.</p>
+         </div>
+     </div>
+     <div class="product1">
+        <div class="image">
+            <img src="car1.jpeg">
+        </div>
+         <div class="text">
+            <h1>car</h1>
+            <p>Lorem ipsum dolor sit amet.</p>
+         </div>
+     </div> 
+     <div class="product1">
+        <div class="image">
+            <img src="car1.jpeg">
+        </div>
+         <div class="text">
+            <h1>car</h1>
+            <p>Lorem ipsum dolor sit amet.</p>
+         </div>
+     </div>
+     
+
+    </div>
 </section>
 </main>
 
