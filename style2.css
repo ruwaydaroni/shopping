@@ -43,16 +43,16 @@ header nav ul li {
 	margin: 10px;
 }
 
-.products .card {
+.products .cards {
 	display: flex;
-	flex-wrap: wrap;
+	/*flex-wrap: wrap;*/
 	gap: 20px;
 	justify-content: space-between;
 
 }
 
-.products .card .product1 {
-	flex: 1 1 calc(33.33%, 20px);
+.products .cards .product1 {
+	/*flex: 1 1 calc(33.33%, 20px);*/
 	box-sizing: border-box;
 	padding: 20px;
 	background-color: #000000;
