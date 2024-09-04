@@ -29,9 +29,29 @@ nav ul li a {
 header nav ul {
 	list-style: none;
 	padding: 0;
-	margin: 0;
+	margin-right: 10px;
 	display: flex;
-	justify-content: center;
+	margin-top: 25%;
+	justify-content: end;
+
+}
+
+header .logo {
+	color: lightgreen;
+	margin: 10px;
+
+}
+
+header {
+	background-color: #333;
+	display: flex;
+	justify-content: space-between;
+	margin: 10px;
+
+}
+
+header nav {
+	justify-content: end;
 }
 
 header nav ul li {
@@ -93,6 +113,7 @@ header nav ul li {
 	transition: all 0.3s linear;
 }
 
+
 .links a {
 	display: block;
 
@@ -108,7 +129,7 @@ ul li {
 	margin: 10px;
 }
 
-.products .card {
+.products .cards {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 20px;
@@ -116,7 +137,7 @@ ul li {
 
 }
 
-.products .card .product1 {
+.products .cards .product1 {
 	flex: 1 1 calc(33.33%, 20px);
 	box-sizing: border-box;
 	padding: 20px;
@@ -125,41 +146,10 @@ ul li {
 	box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (min-width: 800px) {
-	.nav-centre {
-		max-width: 1170px;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+.hero .image {
+	height: 50px;
 
-	}
-
-
-	.nav-header {
-		padding: 0;
-
-	}
-
-	.nav-toggle {
-		display: none;
-
-	}
-
-	.links {
-		height: auto;
-		display: flex;
-
-	}
-
-	ul li {
-		display: flex;
-	}
 }
-
-
-
-
-
 
 .controls {
 	position: absolute;
