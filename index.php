@@ -57,16 +57,17 @@ session_start();
     <main>
 
         <section class="hero">
-            <div class="hero">
-                <div class="slides active" style="background-image: url(img1.png);"></div>
-                <div class="slide" style="background-image: url(img1.png);"></div>
-                <div class="slide" style="background-image: url(images/car3.jpeg);"></div>
+            <div class="slider-container">
+                <div class="image-container">
+                    <img src="https://picsum.photos/id/237/500/300" alt="image" />
+                    <img src="https://picsum.photos/id/1/500/300" alt="image" />
+                    <img src="https://picsum.photos/id/10/500/300" alt="image" />
+                    <img src="https://picsum.photos/id/20/500/300" alt="image" />
+                    <img src="https://picsum.photos/id/200/500/300" alt="image" />
+                </div>
+                <i class="fas fa-angle-double-left btn prev"></i>
+                <i class="fas fa-angle-double-right btn next"></i>
             </div>
-            <div class="controls">
-                <button id="prev">Previous</button>
-                <button id="next">Next</button>
-            </div>
-
         </section>
         <section class="products">
             <div class="container">

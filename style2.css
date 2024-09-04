@@ -81,47 +81,40 @@ header nav ul li {
 }
 
 
-.slider {
+.slider-container {
 	position: relative;
-	width: 100%;
-	max-width: 800px;
-	margin: 2em auto;
+	width: 500px;
 	overflow: hidden;
+	height: 300px;
 	border-radius: 10px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.slides {
+.image-container {
 	display: flex;
-	transition: transform 0.5s ease-in-out;
+	transition: transform 0.4s ease-in-out;
 }
 
-.slide {
-	min-width: 100%;
-	height: 400px;
-	background-size: cover;
-	background-position: center;
+.btn {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	color: white;
+	font-size: 20px;
+	opacity: 0.5;
+	cursor: pointer;
 }
 
-
-.nav-header {
-	display: none;
+.btn.prev {
+	left: 10px;
 }
 
-
-.nav-toggle {
-	transition: all 0.3s linear;
+.btn.next {
+	right: 10px;
 }
 
-
-.links a {
-	display: block;
-
-}
-
-
-ul li {
-	display: block
+.btn:hover {
+	opacity: 1;
 }
 
 .products {

@@ -1,45 +1,38 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const slides = document.querySelectorAll('.slide');
-    const backToTopButton = document.getElementById('back-to-top');
-    let currentSlide = 0;
+const nextEl = document.querySelector(".next");
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTopButton.style.display = 'block';
-        } else {
-            backToTopButton.style.display = 'none';
-        }
-    });
-    let s;
+const prevEl = document.querySelector(".prev");
 
-    backToTopButton.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
+const imgsEl = document.querySelectorAll("img");
 
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-        });
-        document.querySelector('.slides').style.transform = `translateX(-${index * 100}%)`;
+const imageContainerEl = document.querySelector(".image-container");
+
+let currentImg = 1;
+
+let timeout;
+
+nextEl.addEventListener("click", () => {
+    currentImg++;
+    clearTimeout(timeout);
+    updateImg();
+});
+
+prevEl.addEventListener("click", () => {
+    currentImg--;
+    clearTimeout(timeout);
+    updateImg();
+});
+
+updateImg();
+
+function updateImg() {
+    if (currentImg > imgsEl.length) {
+        currentImg = 1;
+    } else if (currentImg < 1) {
+        currentImg = imgsEl.length;
     }
-
-    document.getElementById('next').addEventListener('click', () => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    });
-
-    document.getElementById('prev').addEventListener('click', () => {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-    });
-
-    showSlide(currentSlide);
-});
-const navToggle = document.querySelector('.nav-toggle');
-const links = document.querySelector('.links');
-navToggle.addEventListener("click", function () {
-    links.classList.toggle("show-links");
-});
+    imageContainerEl.style.transform = `translateX(-${(currentImg - 1) * 500}px)`;
+    timeout = setTimeout(() => {
+        currentImg++;
+        updateImg();
+    }, 3000);
+}
