@@ -141,9 +141,45 @@ header nav ul li {
 	opacity: 1;
 }
 
+.card {
+	width: 300px;
+	padding: 20px;
+	border-radius: 10px;
+	background-color: #beb9b9;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.card form {
+	display: grid;
 
 
+}
 
+.card form input {
+	border-radius: 3px;
+
+}
+
+.card form button {
+	border-radius: 5px;
+
+}
+
+.login {
+	align-items: center;
+	justify-content: center;
+	width: 500px;
+	margin-left: 40%;
+	margin-top: 20%;
+}
+
+.signup {
+	align-items: center;
+	justify-content: center;
+	width: 500px;
+	margin-left: 40%;
+	margin-top: 20%;
+}
 
 
 .controls {
@@ -218,15 +254,21 @@ main {
 		left: -0%;
 	}
 
-	overflow: hidden;
-}
 
 
-footer {
-	background-color: #333;
-	color: white;
-	text-align: center;
-	padding: 1em 0;
-	margin-top: 2em;
 
+
+	cards {
+		overflow: hidden;
+	}
+
+
+	footer {
+		background-color: #333;
+		color: white;
+		text-align: center;
+		padding: 1em 0;
+		margin-top: 2em;
+
+	}
 }
