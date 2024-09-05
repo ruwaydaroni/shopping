@@ -19,7 +19,7 @@ require 'db.php';
                 <button type="submit" value="submit">submit</button>
             </form>
             
-        <p>Don't have an account?  <a href="signup.php">Register here!</a></p>
+        <p>Don't have an account?<a href="signup.php">Register here!</a></p>
         </div>
 
     </div>

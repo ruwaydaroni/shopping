@@ -18,9 +18,9 @@ require 'db.php';
                 <label for="username">Username:</label>
                 <input type="text" name="Username" placeholder="insert username">
                 <label for="password">Password:</label>
-                <input type="text" name="password" placeholder="insert password">
+                <input type="text" name="Password" placeholder="insert password">
                 <label for="password">Confirm password:</label>
-                <input type="text" name="password" placeholder="confirm password">
+                <input type="text" name="Confirm" placeholder="confirm password">
                 
                 <br>
                 <button type="submit" value="submit">submit</button>
@@ -31,4 +31,33 @@ require 'db.php';
 
     </div>
 
+</body>
+</html>
+
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $fname = $_POST['fName'];
+    $lname = $_POST['lName'];
+    $username = $_POST['Username'];
+    $password = $_POST['Password'];
+    $confirm = $_POST['Confirm'];
+    
+   if ($password === $confirm){
+    $password1 = password_hash($_POST['Password'], PASSWORD_BCRYPT);
+    
+   } else {
+    echo "password does not match";
+   }
+
+    $sql = "INSERT INTO shop_users (first_name, last_name, username,password) VALUES (:fname, :lname, :username, :password1, :password)";
+    $stmt = $pdo->prepare($sql);
+
+    if ($stmt->execute(['first_name' => $fname, 'last_name' => $lname, 'username' => $username, 'password' => $password1 ])) {
+        echo "Registration successful! <a href='login.php'>Login</a>";
+    } else {
+        echo "Error: Could not register.";
         
+    }
+}
+?>
