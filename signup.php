@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "password does not match";
    }
 
-    $sql = "INSERT INTO shop_users (first_name, last_name, username,password) VALUES (:fname, :lname, :username, :password1, :password)";
+    $sql = "INSERT INTO shop_users (first_name, last_name, username,password) VALUES (:fname, :lname, :username, :password1)";
     $stmt = $pdo->prepare($sql);
 
     if ($stmt->execute(['first_name' => $fname, 'last_name' => $lname, 'username' => $username, 'password' => $password1 ])) {

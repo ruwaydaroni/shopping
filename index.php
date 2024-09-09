@@ -131,3 +131,10 @@ include 'db.php';
 
 
     </body>
+    </html>
+
+    <?php
+    include 'db.php'
+    ?>
+    <html>
+        
