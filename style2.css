@@ -19,12 +19,12 @@ nav ul li {
 }
 
 nav ul li p {
-	color: white;
+	color: rgb(13, 0, 0);
 }
 
 nav ul li a {
 	text-decoration: none;
-	color: aqua;
+	color: rgb(0, 0, 0);
 }
 
 header nav ul {
@@ -34,8 +34,11 @@ header nav ul {
 	display: flex;
 	margin-top: 25%;
 	justify-content: end;
+	font-size: 30px;
 
 }
+
+
 
 header .logo {
 	color: lightgreen;
@@ -53,9 +56,46 @@ header {
 	right: 0;
 	z-index: 1000;
 	align-items: center;
-	height: 75px;
+	height: 100px;
 	padding: 20px 10%;
 }
+
+.icon1 {
+	background-color: #2ec6de;
+	display: flex;
+	width: 50px;
+	height: 50px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100%;
+
+}
+
+.icon2 {
+	background-color: #2ec6de;
+	display: flex;
+	width: 50px;
+	height: 50px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100%;
+
+}
+
+.icon3 {
+	background-color: #2ec6de;
+	display: flex;
+	width: 50px;
+	height: 50px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100%;
+
+
+}
+
+
+
 
 header nav {
 	justify-content: end;
@@ -165,6 +205,8 @@ header nav ul li {
 
 }
 
+.table {}
+
 .login {
 	align-items: center;
 	justify-content: center;
@@ -208,7 +250,13 @@ main {
 	text-align: center;
 }
 
-
+footer {
+	float: left;
+	width: 30px;
+	height: 600px;
+	background: #d81515;
+	padding-left: 20px;
+}
 
 #slider figure {
 	position: relative;
@@ -262,13 +310,4 @@ main {
 		overflow: hidden;
 	}
 
-
-	footer {
-		background-color: #333;
-		color: white;
-		text-align: center;
-		padding: 1em 0;
-		margin-top: 2em;
-
-	}
 }

@@ -50,14 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "password does not match";
    }
 
-    $sql = "INSERT INTO shop_users (first_name, last_name, username,password) VALUES (:fname, :lname, :username, :password1)";
-    $stmt = $con->prepare($sql);
-
-    if ($stmt->execute(['first_name' => $fname, 'last_name' => $lname, 'username' => $username, 'password' => $password1 ])) {
-        echo "Registration successful! <a href='login.php'>Login</a>";
-    } else {
-        echo "Error: Could not register.";
+   $sql = "INSERT INTO users (fname, lname, username,password) VALUES (:fname, :lname, :username, :password1)";
+   $stmt = $con->prepare($sql);
+   
+   if ($stmt->execute(['fname' => $fname, 'lname' => $lname, 'username' => $username, 'password1' => $password1 ])) {
+       echo "Registration successful! <a href='login.php'>Login</a>";
+   } else {
+       echo "Error: Could not register.";
+   }
+   
         
     }
-}
 ?>
