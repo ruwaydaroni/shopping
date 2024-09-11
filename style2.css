@@ -22,6 +22,7 @@ nav ul li p {
 	color: rgb(13, 0, 0);
 }
 
+
 nav ul li a {
 	text-decoration: none;
 	color: rgb(0, 0, 0);
@@ -46,6 +47,8 @@ header .logo {
 
 }
 
+
+
 header {
 	justify-content: space-between;
 	display: flex;
@@ -60,6 +63,8 @@ header {
 	padding: 20px 10%;
 }
 
+
+
 .icon1 {
 	background-color: #2ec6de;
 	display: flex;
@@ -70,6 +75,21 @@ header {
 	border-radius: 100%;
 
 }
+
+.number p {
+
+	font-size: 15px;
+	background-color: #01438a;
+	display: flex;
+	width: 30px;
+	height: 30px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 60%;
+
+}
+
+
 
 .icon2 {
 	background-color: #2ec6de;
