@@ -135,6 +135,35 @@ include 'db.php';
 
 
 
+         </body>
+        </html>
 
 
-    </body>
+
+        <?php
+include 'db.php';  
+
+
+
+$Query = "SELECT product_ame, price, image FROM products";
+
+if ($result = $con->query($Query)) {
+    
+    
+    while ($row = $result->fetch_assoc()) {
+        echo '<div>';
+        echo '<h2>' . htmlspecialchars($row['pName']) . '</h2>';
+        echo '<p>Description not available in query, add if needed</p>';
+        echo '<p>Price: $' . htmlspecialchars($row['price']) . '</p>';
+        echo '<img src="' . htmlspecialchars($row['image']) . '" alt="' . htmlspecialchars($row['product_name']) . '">';
+        echo '</div>';
+    }
+
+    
+    $result->free();
+} else {
+}
+
+$con->close();
+?>
+    
