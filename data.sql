@@ -6,3 +6,17 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+
+
+SELECT
+pName,
+price,
+image
+
+FROM
+products;
+if ($pdo) {
+    echo "PDO connection is successful";
+} else {
+    echo "PDO connection failed";
+}

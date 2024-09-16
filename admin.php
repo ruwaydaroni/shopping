@@ -35,9 +35,10 @@ require 'db.php';
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $pName = $_POST['pName'];
         $price = $_POST['price'];
-        $image = $_FILES['image'];
-        $targetDir = "images/";
-        $targetFile = $targetDir . basename($image["name"]);
+        $image = $_POST['image'];
+        $profilePic = $_FILES['profile_pic'];
+        $targetDir = "uploads/";
+        $targetFile = $targetDir . basename($profilePic["name"]);
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
         // Check if image file is a real image
