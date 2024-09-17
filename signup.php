@@ -45,11 +45,12 @@ require 'db.php'; // Ensure that 'db.php' connects to the database using PDO
 
 
 <?php
+require 'db.php';  // Ensure the database connection is properly included
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Capture form data and sanitize it
-    $fname = htmlspecialchars($_POST['fName']);
-    $lname = htmlspecialchars($_POST['lName']);
-    $username = htmlspecialchars($_POST['Username']);
+    $fname = $_POST['fName'];
+    $lname = $_POST['lName'];
+    $username = $_POST['Username'];
     $password = $_POST['Password'];
     $confirm = $_POST['Confirm'];
 
@@ -58,20 +59,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Hash the password
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        // Prepare the SQL query with named placeholders
-        $sql = "INSERT INTO users (fname, lname, username, password) VALUES (:fname, :lname, :username, :password)";
-
-        // Prepare the SQL statement using PDO
+        // Prepare the SQL query using positional placeholders
+        $sql = "INSERT INTO users (fname, lname, username, password) VALUES (fName, lName, username, password)";
         $stmt = $con->prepare($sql);
 
-        // Bind the values to the named placeholders and execute
-        if ($stmt->execute(['fname' => $fname, 'lname' => $lname, 'username' => $username, 'password' => $hashedPassword])) {
+        // Check if the query was successfully prepared
+        if (!$stmt) {
+            die("Failed to prepare SQL statement: " . $con->error);
+        }
+
+        // Bind parameters and execute the query
+        $stmt->bind_param("ssss", $fname, $lname, $username, $hashedPassword);
+
+        // Execute the statement
+        if ($stmt->execute()) {
             echo "Registration successful! <a href='login.php'>Login</a>";
         } else {
-            echo "Error: Could not register.";
+            echo "Error: Could not register. " . $stmt->error;
         }
+
+        // Close the statement
+        $stmt->close();
     } else {
-        echo "Passwords do not match.";
+        echo "Password does not match.";
     }
 }
+
+// Close the database connection
+$con->close();
 ?>
