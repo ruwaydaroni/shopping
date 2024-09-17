@@ -45,7 +45,6 @@ require 'db.php'; // Ensure that 'db.php' connects to the database using PDO
 
 
 <?php
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Capture form data and sanitize it
     $fname = htmlspecialchars($_POST['fName']);
@@ -53,23 +52,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = htmlspecialchars($_POST['Username']);
     $password = $_POST['Password'];
     $confirm = $_POST['Confirm'];
-    
-   if ($password === $confirm){
-    $password1 = password_hash($_POST['Password'], PASSWORD_BCRYPT);
-    
-   } else {
-    echo "password does not match";
-   }
 
-   $sql = "INSERT INTO users (fname, lname, username,password) VALUES (:fname, :lname, :username, :password1)";
-   $stmt = $con->prepare($sql);
-   
-   if ($stmt->execute(['fname' => $fname, 'lname' => $lname, 'username' => $username, 'password1' => $password1 ])) {
-       echo "Registration successful! <a href='login.php'>Login</a>";
-   } else {
-       echo "Error: Could not register.";
-   }
-   
-        
+    // Check if passwords match
+    if ($password === $confirm) {
+        // Hash the password
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+        // Prepare the SQL query with named placeholders
+        $sql = "INSERT INTO users (fname, lname, username, password) VALUES (:fname, :lname, :username, :password)";
+
+        // Prepare the SQL statement using PDO
+        $stmt = $con->prepare($sql);
+
+        // Bind the values to the named placeholders and execute
+        if ($stmt->execute(['fname' => $fname, 'lname' => $lname, 'username' => $username, 'password' => $hashedPassword])) {
+            echo "Registration successful! <a href='login.php'>Login</a>";
+        } else {
+            echo "Error: Could not register.";
+        }
+    } else {
+        echo "Passwords do not match.";
     }
+}
 ?>
