@@ -31,31 +31,26 @@ require 'header.php';
 </body>
 
 <?php
-include 'db.php';  // Ensure this points to the correct location of db.php
-
+include 'db.php'; 
 if ($con) {
-    // Connection is successful
-    // echo "MySQLi connection is established!";
 } else {
     die("Failed to establish MySQLi connection: " . $con->connect_error);
 }
 
-// Assuming form data is sent via POST method and image file via $_FILES
-$pName = $_POST['pName']; // Product name from form
-$price = $_POST['price']; // Price from form
-$image = $_FILES['image']; // Image file from form
+$pName = $_POST['pName']; 
+$price = $_POST['price']; 
+$image = $_FILES['image'];
 
-// Define the target directory for the uploaded image
 $targetDir = "uploads/";
 if (!file_exists($targetDir)) {
-    mkdir($targetDir, 0777, true); // Create the directory with proper permissions
+    mkdir($targetDir, 0777, true);
 }
 
 $targetFile = $targetDir . basename($image["name"]);
 
-// Check if the image was uploaded successfully
+
 if (move_uploaded_file($image["tmp_name"], $targetFile)) {
-    // Prepare the SQL statement for MySQLi
+   
     $sql = "INSERT INTO products (product_name, price, image) VALUES (?, ?, ?)";
     $stmt = $con->prepare($sql);
 
@@ -63,8 +58,7 @@ if (move_uploaded_file($image["tmp_name"], $targetFile)) {
         die("Failed to prepare SQL statement: " . $con->error);
     }
 
-    // Bind the parameters and execute the statement
-    // 'sds' means: s = string, d = double (or float), s = string
+
     $stmt->bind_param("sds", $pName, $price, $image['name']);
     $result = $stmt->execute();
 
@@ -77,6 +71,6 @@ if (move_uploaded_file($image["tmp_name"], $targetFile)) {
     echo "Error: Image upload failed.";
 }
 
-// Close the MySQLi connection
+
 $con->close();
 ?>
