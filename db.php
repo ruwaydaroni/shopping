@@ -4,11 +4,12 @@ $username = "root";
 $password = "";
 $dbname = "shopping2";
 
-
-$con = new mysqli($servername, $username, $password, $dbname);
-
-
-if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
-};
+try {
+    // Create a new PDO instance
+    $con = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    // Set the PDO error mode to exception
+    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
 ?>

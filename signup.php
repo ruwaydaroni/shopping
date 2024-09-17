@@ -75,14 +75,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($stmt->execute()) {
                 echo "Registration successful! <a href='login.php'>Login</a>";
             } else {
-                echo "Error: Could not register. " . $stmt->errorInfo()[2];
+                echo "Error: Could not register.";
             }
         } catch (PDOException $e) {
-            // Display error message in case of a failure
+            // Display PDO exception error message
             echo "Error: " . $e->getMessage();
         }
     } else {
-        echo "Password does not match.";
+        echo "Passwords do not match.";
     }
 }
 
