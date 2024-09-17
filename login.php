@@ -1,11 +1,12 @@
 <?php
+session_start();  // Start session to handle user session after login
 require 'db.php';  // Ensure the database connection is properly included
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check if POST variables are set
     if (isset($_POST['Username']) && isset($_POST['password'])) {
-        // Get the form data
-        $username = $_POST['Username'];
+        // Get the form data and sanitize it
+        $username = htmlspecialchars($_POST['Username']);
         $password = $_POST['password'];
 
         // Prepare the SQL query to select the user based on the username
@@ -30,9 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 // Verify the password
                 if (password_verify($password, $user['password'])) {
-                    echo "Login successful!";
+                    // Start session, set session variables, and redirect
+                    $_SESSION['username'] = $username;  // Store user info in session
+                    $_SESSION['user_id'] = $user['id']; // You can store other user details if needed
+
+                    // Redirect to home.php
                     header('Location: home.php');
-                    // Start session or redirect user as needed
+                    exit();  // Ensure no further code is executed after redirection
                 } else {
                     echo "Incorrect password.";
                 }
@@ -54,25 +59,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $con->close();
 ?>
 
-    <head>
-        <title>login</title>
-        <link rel="stylesheet" href="style2.css">
+<html>
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="style2.css">
 </head>
+
 <body>
     <div class="login">
         <div class="card">
             <form action="login.php" method="post">
                 <label for="username">Username:</label>
-                <input type="text" name="Username" placeholder="insert username">
+                <input type="text" name="Username" placeholder="Insert username" required>
+
                 <label for="password">Password:</label>
-                <input type="text" name="password" placeholder="insert password">
+                <input type="password" name="password" placeholder="Insert password" required>
                 <br>
-                <button type="submit" value="submit">submit</button>
+                <button type="submit" value="submit">Submit</button>
             </form>
-            
-        <p>Don't have an account?<a href="signup.php">Register here!</a></p>
+
+            <p>Don't have an account? <a href="signup.php">Register here!</a></p>
         </div>
-
     </div>
+</body>
 
-        
+</html>
