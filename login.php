@@ -9,25 +9,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username = htmlspecialchars($_POST['Username']);
         $password = $_POST['password'];
 
-        // Prepare the SQL query to select the user based on the username
-        $sql = "SELECT * FROM users WHERE username = ?";
-        $stmt = $con->prepare($sql);
+        try {
+            // Prepare the SQL query to select the user based on the username
+            $sql = "SELECT * FROM users WHERE username = :username";
+            $stmt = $con->prepare($sql);
 
-        // Check if the query was successfully prepared
-        if (!$stmt) {
-            die("Failed to prepare SQL statement: " . $con->error);  // Log the MySQL error
-        }
+            // Check if the query was successfully prepared
+            if (!$stmt) {
+                throw new Exception("Failed to prepare SQL statement: " . $con->errorInfo()[2]);
+            }
 
-        // Bind the username parameter to the prepared statement
-        $stmt->bind_param("s", $username);
+            // Bind the username parameter to the prepared statement
+            $stmt->bindParam(':username', $username);
 
-        // Execute the statement
-        if ($stmt->execute()) {
-            $result = $stmt->get_result();
+            // Execute the statement
+            $stmt->execute();
 
             // Check if a user with the provided username exists
-            if ($result->num_rows > 0) {
-                $user = $result->fetch_assoc();
+            if ($stmt->rowCount() > 0) {
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 // Verify the password
                 if (password_verify($password, $user['password'])) {
@@ -44,21 +44,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 echo "No user found with that username.";
             }
-        } else {
-            echo "Error executing query: " . $stmt->error;  // Output execution error if any
+        } catch (PDOException $e) {
+            // Display PDO exception error message
+            echo "Error executing query: " . $e->getMessage();
+        } catch (Exception $e) {
+            // Display general exception error message
+            echo "Error: " . $e->getMessage();
         }
-
-        // Close the statement
-        $stmt->close();
     } else {
         echo "Username and/or password fields are missing.";
     }
 }
 
-// Close the database connection
-$con->close();
+// No need to explicitly close the connection with PDO, but you can set it to null
+$con = null;
 ?>
 
+<!DOCTYPE html>
 <html>
 
 <head>
