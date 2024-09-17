@@ -42,7 +42,7 @@ require 'db.php';
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a href="login.php">
                             <div class="icon3">
                             <i class='bx bx-log-out'></i>
                            

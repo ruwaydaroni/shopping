@@ -31,7 +31,7 @@ include 'db.php';
                     <ul>
 
                         <li>
-                            <a href="">
+                            <a href="cart.php">
                                 <i class='bx bx-cart'></i>
                                 <p>cart</p>
                             </a>
@@ -74,57 +74,53 @@ include 'db.php';
             </div>
 
 
-            <section class="products">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <div class="thumbnail">
-                                <a href="products.php">
-                                    <div class="car1">
-                                        <img src="images/car3x.jfif" alt="Camera">
-                                </a>
-                                <center>
-                                    <div class="caption">
-                                        <p id="autoResize">Aston Martins</p>
-                                        <p>Aston Martins available now.</p>
-                                    </div>
-                            </div>
-                            </center>
-                        </div>
-                    </div>
-                    <div class="col-xs-4">
-                        <div class="thumbnail">
-                            <a href="products.php">
-                                <div class="car2">
-                                    <img src="images/car1x.jfif" alt="Watch">
-                            </a>
-                            <center>
-                                <div class="caption">
-                                    <p id="autoResize">Lambos</p>
-                                    <p>Lambos available now.</p>
-                                </div>
-                        </div>
-                        </center>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="thumbnail">
-                        <a href="products.php">
-                            <div lcass="car3">
-                                <img src="images/car2x.jfif" alt="Shirt">
-                        </a>
-                        <center>
-                            <div class="caption">
-                                <p id="autoResize">BMWs</p>
-                                <p>BMWs available now.</p>
-                            </div>
-                    </div>
-                    </center>
+                                    <?php
+include 'db.php';  
 
-                </div>
-                </div>
-                </div>
-            </section>
+
+
+$Query = "SELECT product_name, price, image FROM products";
+
+if ($result = $con->query($Query)) {
+    
+    
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="container">';
+        echo '<div class="row">';
+        echo '<div class="col-xs-4">';
+        echo '<div class="thumbnail">';
+        echo '<a href="products.php">';
+        echo '<div class="car1">';
+        echo '<img src="images/' . htmlspecialchars($row['image']) . '" alt="' . htmlspecialchars($row['product_name']) . '">';
+        echo '</a>';
+        echo '<center>';
+        echo '<div class="caption">';
+        echo '<p id="autoResize>' . htmlspecialchars($row['product_name']) . '</p>';
+        echo '<p>Description not available in query, add if needed</p>';
+        echo '<br>';
+        echo '<p>Price: $' . htmlspecialchars($row['price']) . '</p>';
+        echo '</div>';
+        echo '</centre>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        
+
+    
+    }
+
+    
+    $result->free();
+} else {
+}
+
+$con->close();
+?>
+    
+
+</section>
 
             </div>
         </main>
@@ -140,30 +136,4 @@ include 'db.php';
 
 
 
-        <?php
-include 'db.php';  
-
-
-
-$Query = "SELECT product_ame, price, image FROM products";
-
-if ($result = $con->query($Query)) {
-    
-    
-    while ($row = $result->fetch_assoc()) {
-        echo '<div>';
-        echo '<h2>' . htmlspecialchars($row['pName']) . '</h2>';
-        echo '<p>Description not available in query, add if needed</p>';
-        echo '<p>Price: $' . htmlspecialchars($row['price']) . '</p>';
-        echo '<img src="' . htmlspecialchars($row['image']) . '" alt="' . htmlspecialchars($row['product_name']) . '">';
-        echo '</div>';
-    }
-
-    
-    $result->free();
-} else {
-}
-
-$con->close();
-?>
     
