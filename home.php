@@ -1,6 +1,8 @@
 <?php
 session_start();
-include 'db.php';
+require 'db.php'; // Use require instead of include for mandatory files
+
+// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
@@ -55,11 +57,19 @@ if (!isset($_SESSION['user_id'])) {
         <div class="container mt-4">
             <div class="row">
                 <?php
-                include 'db.php';
+                try {
+                    // Prepare the SQL query
+                    $sql = "SELECT product_name, price, image FROM products";
+                    $stmt = $con->prepare($sql);
 
-                $Query = "SELECT product_name, price, image FROM products";
-                if ($result = $con->query($Query)) {
-                    while ($row = $result->fetch_assoc()) {
+                    // Execute the statement
+                    $stmt->execute();
+
+                    // Fetch results
+                    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    // Display results
+                    foreach ($products as $row) {
                         echo '<div class="col-xs-12 col-sm-6 col-md-4 mb-4">';
                         echo '<div class="thumbnail">';
                         echo '<a href="products.php">';
@@ -67,24 +77,20 @@ if (!isset($_SESSION['user_id'])) {
                         echo '</a>';
                         echo '<div class="caption text-center">';
                         echo '<p id="autoResize">' . htmlspecialchars($row['product_name']) . '</p>';
-                        
                         echo '<p>Price: $' . htmlspecialchars($row['price']) . '</p>';
                         echo '</div>';
                         echo '</div>';
                         echo '</div>';
                     }
-                    $result->free();
-                } else {
-                    echo '<p>Error fetching data</p>';
+                } catch (PDOException $e) {
+                    echo '<p>Error fetching data: ' . $e->getMessage() . '</p>';
                 }
 
-                $con->close();
+                // No need to close PDO connection explicitly
                 ?>
             </div>
         </div>
     </main>
-
-
 
     <script src="../bootstrap/js/bootstrap.min.js"></script>
 </body>
