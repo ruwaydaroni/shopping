@@ -34,7 +34,10 @@ require 'db.php';
 </body>
 </html>
 
+
+
 <?php
+require 'db.php';  // Ensure the database connection is properly included
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fname = $_POST['fName'];
@@ -42,23 +45,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['Username'];
     $password = $_POST['Password'];
     $confirm = $_POST['Confirm'];
-    
-   if ($password === $confirm){
-    $password1 = password_hash($_POST['Password'], PASSWORD_BCRYPT);
-    
-   } else {
-    echo "password does not match";
-   }
 
-   $sql = "INSERT INTO users (fname, lname, username,password) VALUES (:fname, :lname, :username, :password1)";
-   $stmt = $con->prepare($sql);
-   
-   if ($stmt->execute(['fname' => $fname, 'lname' => $lname, 'username' => $username, 'password1' => $password1 ])) {
-       echo "Registration successful! <a href='login.php'>Login</a>";
-   } else {
-       echo "Error: Could not register.";
-   }
-   
-        
+    // Check if passwords match
+    if ($password === $confirm) {
+        // Hash the password
+        $password1 = password_hash($password, PASSWORD_BCRYPT);
+
+        // Prepare the SQL query using positional placeholders
+        $sql = "INSERT INTO users (fname, lname, username, password) VALUES (?, ?, ?, ?)";
+        $stmt = $con->prepare($sql);
+
+        // Check if the query was successfully prepared
+        if (!$stmt) {
+            die("Failed to prepare SQL statement: " . $con->error);
+        }
+
+        // Bind parameters and execute the query
+        $stmt->bind_param("ssss", $fname, $lname, $username, $password1);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            echo "Registration successful! <a href='login.php'>Login</a>";
+        } else {
+            echo "Error: Could not register.";
+        }
+
+        // Close the statement
+        $stmt->close();
+    } else {
+        echo "Password does not match.";
     }
+}
+
+// Close the database connection
+$con->close();
 ?>
