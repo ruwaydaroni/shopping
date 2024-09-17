@@ -48,9 +48,10 @@ require 'db.php'; // Ensure that 'db.php' connects to the database using PDO
 require 'db.php';  // Ensure the database connection is properly included
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $fname = $_POST['fName'];
-    $lname = $_POST['lName'];
-    $username = $_POST['Username'];
+    // Retrieve and sanitize input values
+    $fname = htmlspecialchars($_POST['fName']);
+    $lname = htmlspecialchars($_POST['lName']);
+    $username = htmlspecialchars($_POST['Username']);
     $password = $_POST['Password'];
     $confirm = $_POST['Confirm'];
 
@@ -59,32 +60,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Hash the password
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-        // Prepare the SQL query using positional placeholders
-        $sql = "INSERT INTO users (fname, lname, username, password) VALUES (fName, lName, username, password)";
-        $stmt = $con->prepare($sql);
+        try {
+            // Prepare the SQL query using named placeholders
+            $sql = "INSERT INTO users (fname, lname, username, password) VALUES (:fname, :lname, :username, :password)";
+            $stmt = $con->prepare($sql);
 
-        // Check if the query was successfully prepared
-        if (!$stmt) {
-            die("Failed to prepare SQL statement: " . $con->error);
+            // Bind the parameters
+            $stmt->bindParam(':fname', $fname);
+            $stmt->bindParam(':lname', $lname);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', $hashedPassword);
+
+            // Execute the statement
+            if ($stmt->execute()) {
+                echo "Registration successful! <a href='login.php'>Login</a>";
+            } else {
+                echo "Error: Could not register. " . $stmt->errorInfo()[2];
+            }
+        } catch (PDOException $e) {
+            // Display error message in case of a failure
+            echo "Error: " . $e->getMessage();
         }
-
-        // Bind parameters and execute the query
-        $stmt->bind_param("ssss", $fname, $lname, $username, $hashedPassword);
-
-        // Execute the statement
-        if ($stmt->execute()) {
-            echo "Registration successful! <a href='login.php'>Login</a>";
-        } else {
-            echo "Error: Could not register. " . $stmt->error;
-        }
-
-        // Close the statement
-        $stmt->close();
     } else {
         echo "Password does not match.";
     }
 }
 
 // Close the database connection
-$con->close();
+$con = null;
 ?>
