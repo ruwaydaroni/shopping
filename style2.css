@@ -18,14 +18,17 @@ nav ul li {
 	margin: 10px;
 }
 
-nav ul li p {
-	color: rgb(13, 0, 0);
+nav ul li a p {
+	color: rgb(38, 150, 219);
+	font-size: 5px;
+
+
 }
 
 
 nav ul li a {
 	text-decoration: none;
-	color: rgb(0, 0, 0);
+	color: rgb(26, 185, 228);
 }
 
 header nav ul {
@@ -145,51 +148,6 @@ header nav ul li {
 	margin-top: 550px;
 	width: 100%;
 
-}
-
-/* styles.css */
-
-.products {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 20px;
-	padding: 20px;
-	background-color: #f9f9f9;
-}
-
-.product {
-	background: #fff;
-	border: 1px solid #ddd;
-	border-radius: 8px;
-	padding: 20px;
-	width: 300px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	text-align: center;
-}
-
-.product-image {
-	max-width: 100%;
-	height: auto;
-	border-bottom: 1px solid #ddd;
-	margin-bottom: 15px;
-}
-
-.product-name {
-	font-size: 1.5em;
-	margin: 10px 0;
-	color: #333;
-}
-
-.product-description {
-	font-size: 1em;
-	margin-bottom: 15px;
-	color: #666;
-}
-
-.product-price {
-	font-size: 1.2em;
-	font-weight: bold;
-	color: #e74c3c;
 }
 
 .products .cards {

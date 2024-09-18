@@ -28,13 +28,14 @@ if (!isset($_SESSION['user_id'])) {
         </div>
         <nav>
             <ul>
-                <li><a href="cart_page.php"><i class='bx bx-cart'></i>
+                <li><a href="cart_page.php"><i class='icon1 bx bx-cart'>
+                </i>
                         <p>Cart</p>
                     </a></li>
-                <li><a href="#"><i class='bx bx-cog'></i>
+                <li><a href="#"><i class='icon2 bx bx-cog'></i>
                         <p>Settings</p>
                     </a></li>
-                <li><a href="logout.php"><i class='bx bx-log-out'></i>
+                <li><a href="logout.php"><i class='icon3 bx bx-log-out'></i>
                         <p>Logout</p>
                     </a></li>
             </ul>
