@@ -28,7 +28,7 @@ if (!isset($_SESSION['user_id'])) {
         </div>
         <nav>
             <ul>
-                <li><a href="cart.php"><i class='bx bx-cart'></i>
+                <li><a href="cart_page.php"><i class='bx bx-cart'></i>
                         <p>Cart</p>
                     </a></li>
                 <li><a href="#"><i class='bx bx-cog'></i>
@@ -59,7 +59,7 @@ if (!isset($_SESSION['user_id'])) {
                 <?php
                 try {
                     // Prepare the SQL query
-                    $sql = "SELECT product_name, price, image FROM products";
+                    $sql = "SELECT id, product_name, price, image FROM products";
                     $stmt = $con->prepare($sql);
 
                     // Execute the statement
@@ -69,7 +69,7 @@ if (!isset($_SESSION['user_id'])) {
                     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     // Display results
-                    foreach ($products as $row) {
+                    foreach ($products as $row) { 
                         echo '<div class="col-xs-12 col-sm-6 col-md-4 mb-4">';
                         echo '<div class="thumbnail">';
                         echo '<a href="products.php">';
@@ -78,11 +78,19 @@ if (!isset($_SESSION['user_id'])) {
                         echo '<div class="caption text-center">';
                         echo '<p id="autoResize">' . htmlspecialchars($row['product_name']) . '</p>';
                         echo '<p>Price: $' . htmlspecialchars($row['price']) . '</p>';
+                        echo '<form action="cart.php" method="post">';
+                        echo '<input type="hidden" name="product_id" value="' . htmlspecialchars($row['id']) . '">';
+                        echo '<input type="hidden" name="product_name" value="' . htmlspecialchars($row['product_name']) . '">';
+                        echo '<input type="hidden" name="product_price" value="' . htmlspecialchars($row['price']) . '">';
+                        echo '<button type="submit" class="btn btn-primary">Add to Cart</button>';
+                        echo '</form>';
                         echo '</div>';
                         echo '</div>';
                         echo '</div>';
                     }
-                } catch (PDOException $e) {
+                    
+                    }
+                 catch (PDOException $e) {
                     echo '<p>Error fetching data: ' . $e->getMessage() . '</p>';
                 }
 

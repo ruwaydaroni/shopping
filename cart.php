@@ -1,76 +1,66 @@
 <?php
-require 'db.php';
-?>
-<!DOCTYPE>
-<html>
+session_start();
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
-    <link rel="stylesheet" href="style2.css">
+// Handle adding items to the cart
+if (isset($_POST['product_id']) && isset($_POST['product_name']) && isset($_POST['product_price'])) {
     
-    <title>cart</title>
-</head>
+    $product_id = $_POST['product_id'];
+    $product_name = $_POST['product_name'];
+    $product_price = $_POST['product_price'];
+    
+    $product = array(
+        'id' => $product_id,
+        'name' => $product_name,
+        'price' => $product_price,
+        'quantity' => 1
+    );
+    
+    if (isset($_SESSION['cart'])) {
+        $cart = $_SESSION['cart'];
+        $product_exists = false;
+        foreach ($cart as &$item) {
+            if ($item['id'] == $product_id) {
+                $item['quantity']++;
+                $product_exists = true;
+                break;
+            }
+        }
+        if (!$product_exists) {
+            $cart[] = $product;
+        }
+        $_SESSION['cart'] = $cart;
+    } else {
+        $_SESSION['cart'] = array($product);
+    }
 
-<body>
-    <header>
-        <div class="logo">
-            <h1>Shopping Cart</h1>
-        </div>
+    // Redirect to cart page after adding item
+    header('Location: cart_page.php');
+    exit();
+}
 
-        <div class="icons">
-            <nav>
-                <ul>
-                    <li>
-                        <a href="">
-                            <div class="icon1">  
-                            <i class='bx bx-cart'></i>
-                            </div>
-                            <div class="number"> 
-                                    <p>0</p>
-                            </div> 
-                        </a>
-                    </li>
+// Handle removing items from the cart
+if (isset($_POST['remove_product_id'])) {
+    $remove_product_id = $_POST['remove_product_id'];
+    
+    if (isset($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $key => $item) {
+            if ($item['id'] == $remove_product_id) {
+                // Remove the item from the cart
+                unset($_SESSION['cart'][$key]);
+                
+                // Reindex the array to avoid gaps
+                $_SESSION['cart'] = array_values($_SESSION['cart']);
+                break;
+            }
+        }
+    }
+    
+    // Redirect to cart page after removing item
+    header('Location: cart_page.php');
+    exit();
+}
 
-                    <li>
-                        <a href="">
-                            <div class="icon2">
-                            <i class='bx bx-cog'></i>
-                            
-</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="login.php">
-                            <div class="icon3">
-                            <i class='bx bx-log-out'></i>
-                           
-                        </a>
-                    </li>
-                            
-                </ul>
-
-            </nav>
-        </div>
-        </div>
-    </header>
-    <div class="container">
-        <div class="div1">
-        </div>
-    </div>
-    <div class="table">
-        <table>
-            <tbody>
-                <tr>
-                    <th>item name</th>
-                    <th>item number</th>
-                    <th>item price</th>
-
-
-                </tr>
-            </tbody>
-        </table>
-</body>
-
-</html>
+// If no valid actions, redirect back to home page
+header('Location: home.php');
+exit();
+?>
