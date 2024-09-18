@@ -1,74 +1,63 @@
 <?php
 session_start();
-
-if (!isset($_SESSION['cart'])) {
-    echo "<p>Your cart is empty.</p>";
-    exit;
-}
-
-$cart = $_SESSION['cart'];
-$total_quantity = 0; // To store the total quantity of items in the cart
-$total_price = 0;    // To store the total price of items in the cart
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="style2.css">
+    <title>Shopping</title>
 </head>
 
 <body>
-    <h1>Your Shopping Cart</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($cart as $item): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($item['name']); ?></td>
-                    <td>$<?php echo htmlspecialchars(number_format($item['price'], 2)); ?></td>
-                    <td><?php echo htmlspecialchars($item['quantity']); ?></td>
-                    <td>$<?php echo htmlspecialchars(number_format($item['price'] * $item['quantity'], 2)); ?></td>
-                    <td>
-                        <form action="cart.php" method="post">
-                            <input type="hidden" name="remove_product_id" value="<?php echo $item['id']; ?>">
-                            <button type="submit">Remove</button>
-                        </form>
-                    </td>
-                </tr>
-                <?php
-                // Update the total quantity and total price
-                $total_quantity += $item['quantity'];
-                $total_price += $item['price'] * $item['quantity'];
-                ?>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+    <?php
+    require 'header.php';
 
+    // Check if cart exists
+    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+        echo '<div style="margin-top: 70px; margin-left: 40%">';
+        echo '<h2>Your Cart</h2>';
+        echo '<table>';
+        echo '<tr><th>Product Name</th><th>Price</th><th>Quantity</th><th>Total</th><th>Action</th></tr>';
+        echo '</div>';
+        $total_cost = 0;
+
+        foreach ($_SESSION['cart'] as $item) {
+            $total = $item['price'] * $item['quantity'];
+            echo '<tr>';
+            echo '<td>' . htmlspecialchars($item['name']) . '</td>';
+            echo '<td>$' . htmlspecialchars($item['price']) . '</td>';
+            echo '<td>' . htmlspecialchars($item['quantity']) . '</td>';
+            echo '<td>$' . htmlspecialchars($total) . '</td>';
+            echo '<td>';
+            echo '<form action="cart.php" method="post">';
+            echo '<input type="hidden" name="remove_product_id" value="' . htmlspecialchars($item['id']) . '">';
+            echo '<button type="submit" class="btn btn-danger">Remove</button>';
+            echo '</form>';
+            echo '</td>';
+            echo '</tr>';
+
+            $total_cost += $total;
+        }
+
+        echo '</table>';
+        echo '<p><strong>Total Cost: $' . htmlspecialchars($total_cost) . '</strong></p>';
+        echo '<a href="checkout.php" class="btn btn-primary">Proceed to Checkout</a>';
+        echo '</div>';
+
+        $total_quantity += $item['quantity'];
+        $total_price += $item['price'] * $item['quantity'];
+
+    } else {
+        echo '<p>Your cart is empty.</p>';
+    }
+    ?>
     <div class="cart-summary">
         <h3>Cart Summary</h3>
-        <p>Total Quantity of Items: <?php echo $total_quantity; ?></p> <!-- Displaying total quantity -->
-        <p>Total Price: $<?php echo number_format($total_price, 2); ?></p> <!-- Displaying total price -->
-    </div>
-
-    <div class="checkout">
-        <form action="checkout.php" method="post">
-            <button type="submit">Proceed to Checkout</button>
-        </form>
-    </div>
-
-</body>
-
-</html>
+        <p>Total Quantity of Items: <?php echo $total_quantity; ?></p>
+        <p>Total Price: $<?php echo number_format($total_price, 2); ?></p>
