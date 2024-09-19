@@ -50,14 +50,9 @@ session_start();
         echo '<a href="checkout.php" class="btn btn-primary">Proceed to Checkout</a>';
         echo '</div>';
 
-        $total_quantity += $item['quantity'];
-        $total_price += $item['price'] * $item['quantity'];
+      
 
     } else {
         echo '<p>Your cart is empty.</p>';
     }
     ?>
-    <div class="cart-summary">
-        <h3>Cart Summary</h3>
-        <p>Total Quantity of Items: <?php echo $total_quantity; ?></p>
-        <p>Total Price: $<?php echo number_format($total_price, 2); ?></p>

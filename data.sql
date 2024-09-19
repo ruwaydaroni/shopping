@@ -9,14 +9,10 @@ CREATE TABLE users (
 
 
 SELECT
-pName,
+product_name,
 price,
 image
 
 FROM
 products;
-if ($pdo) {
-    echo "PDO connection is successful";
-} else {
-    echo "PDO connection failed";
-}
+
