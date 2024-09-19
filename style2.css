@@ -247,17 +247,31 @@ header nav ul li {
 }
 
 .sidebar {
-	margin-top: 100px;
-	margin-left: 5px;
-	background-color: #01438a;
-
-
+	width: 250px;
+	height: 100%;
+	background-color: #333;
+	padding: 10px;
+	color: white;
+	position: fixed;
 }
 
 .sidebar ul {
-	display: grid;
 	list-style: none;
+	padding: 0;
+}
 
+.sidebar ul li {
+	padding: 10px;
+	text-align: left;
+}
+
+.sidebar ul li a {
+	color: white;
+	text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+	background-color: #444;
 }
 
 .controls {
