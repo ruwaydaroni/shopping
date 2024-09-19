@@ -1,5 +1,5 @@
 * {
-	margin: 0;
+	margin-top: 40px;
 	padding: 0;
 	box-sizing: border-box;
 	font-family: Arial, Helvetica, sans-serif;
@@ -248,6 +248,7 @@ header nav ul li {
 
 .sidebar {
 	width: 250px;
+	margin-top: 20%;
 	height: 100%;
 	background-color: #333;
 	padding: 10px;

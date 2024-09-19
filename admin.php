@@ -14,9 +14,6 @@ require 'db.php';
 </head>
 
 <body>
-    <?php
-    require 'header.php';
-    ?>
 
     <div class="sidebar">
         <ul>
