@@ -246,6 +246,19 @@ header nav ul li {
 	margin-top: 20%;
 }
 
+.sidebar {
+	margin-top: 100px;
+	margin-left: 5px;
+	background-color: #01438a;
+
+
+}
+
+.sidebar ul {
+	display: grid;
+	list-style: none;
+
+}
 
 .controls {
 	position: absolute;
