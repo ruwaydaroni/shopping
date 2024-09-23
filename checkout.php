@@ -21,9 +21,11 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
         foreach ($cart as $item) {
             $product_id = $item['id'];
             $quantity = $item['quantity'];
+            $price = $item['price'];  // Retrieve the price from the cart
 
-            $stmt = $con->prepare("INSERT INTO ordered (user_id, product_id, quantity) VALUES (?, ?, ?)");
-            $stmt->execute([$user_id, $product_id, $quantity]);
+            // Insert the order details into the 'ordered' table
+            $stmt = $con->prepare("INSERT INTO ordered (user_id, product_id, quantity, price) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$user_id, $product_id, $quantity, $price]);
         }
 
         // Commit transaction
