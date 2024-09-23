@@ -14,7 +14,6 @@ session_start();
 </head>
 
 <body>
-    
 
     <?php
     require 'header.php';
@@ -51,7 +50,7 @@ session_start();
         echo '<a href="checkout.php" class="btn btn-primary">Proceed to Checkout</a>';
         echo '</div>';
 
-      
+
 
     } else {
         echo '<p>Your cart is empty.</p>';
