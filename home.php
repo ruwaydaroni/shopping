@@ -1,6 +1,7 @@
 <?php
-session_start();
-require 'db.php'; // Use require instead of include for mandatory files
+session_start(); // Start session at the top
+
+require 'db.php'; // Use require for necessary files
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -8,7 +9,9 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+$user_id = $_SESSION['user_id']; // Get the logged-in user's ID
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,8 +31,7 @@ if (!isset($_SESSION['user_id'])) {
         </div>
         <nav>
             <ul>
-                <li><a href="cart_page.php"><i class='icon1 bx bx-cart'>
-                </i>
+                <li><a href="cart_page.php"><i class='icon1 bx bx-cart'></i>
                         <p>Cart</p>
                     </a></li>
                 <li><a href="#"><i class='icon2 bx bx-cog'></i>
@@ -59,7 +61,7 @@ if (!isset($_SESSION['user_id'])) {
             <div class="row">
                 <?php
                 try {
-                    // Prepare the SQL query
+                    // Prepare the SQL query to fetch all products
                     $sql = "SELECT id, product_name, price, image FROM products";
                     $stmt = $con->prepare($sql);
 
@@ -70,7 +72,7 @@ if (!isset($_SESSION['user_id'])) {
                     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                     // Display results
-                    foreach ($products as $row) { 
+                    foreach ($products as $row) {
                         echo '<div class="col-xs-12 col-sm-6 col-md-4 mb-4">';
                         echo '<div class="thumbnail">';
                         echo '<a href="products.php">';
@@ -89,13 +91,39 @@ if (!isset($_SESSION['user_id'])) {
                         echo '</div>';
                         echo '</div>';
                     }
-                    
-                    }
-                 catch (PDOException $e) {
+                } catch (PDOException $e) {
                     echo '<p>Error fetching data: ' . $e->getMessage() . '</p>';
                 }
+                ?>
+            </div>
+        </div>
 
-                // No need to close PDO connection explicitly
+        <!-- User's Uploaded Products Section -->
+        <div class="container mt-4">
+            <h3>Your Uploaded Products</h3>
+            <div class="row">
+                <?php
+                try {
+                    // Prepare SQL to fetch products uploaded by the logged-in user
+                    $sql = "SELECT product_name, quantity, price FROM products WHERE user_id = ?";
+                    $stmt = $con->prepare($sql);
+                    $stmt->execute([$user_id]); // Pass the user_id to the query
+
+                    $user_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    if (count($user_products) > 0) {
+                        foreach ($user_products as $row) {
+                            echo '<p>Product Name: ' . htmlspecialchars($row['product_name']) . '</p>';
+                            echo '<p>Quantity: ' . htmlspecialchars($row['quantity']) . '</p>';
+                            echo '<p>Price: $' . htmlspecialchars($row['price']) . '</p>';
+                            echo '<hr>';
+                        }
+                    } else {
+                        echo '<p>You have not uploaded any products yet.</p>';
+                    }
+                } catch (PDOException $e) {
+                    echo '<p>Error fetching your products: ' . $e->getMessage() . '</p>';
+                }
                 ?>
             </div>
         </div>

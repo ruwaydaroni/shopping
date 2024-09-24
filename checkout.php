@@ -24,7 +24,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             $price = $item['price'];  // Retrieve the price from the cart
 
             // Insert the order details into the 'ordered' table
-            $stmt = $con->prepare("INSERT INTO ordered (user_id, product_id, quantity, price) VALUES (?, ?, ?, ?)");
+            $stmt = $con->prepare("INSERT INTO orders (user_id, product_id, quantity, price) VALUES (?, ?, ?, ?)");
             $stmt->execute([$user_id, $product_id, $quantity, $price]);
         }
 
