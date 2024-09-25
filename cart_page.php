@@ -47,7 +47,7 @@ session_start();
 
         echo '</table>';
         echo '<p><strong>Total Cost: $' . htmlspecialchars($total_cost) . '</strong></p>';
-        echo '<a href="checkout.php" class="btn btn-primary">Proceed to Checkout</a>';
+        echo '<a href="payment.html" class="btn btn-primary">Proceed to Checkout</a>';
         echo '</div>';
 
 
