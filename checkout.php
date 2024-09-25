@@ -24,20 +24,20 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
             $price = $item['price'];  // Retrieve the price from the cart
 
             // Insert the order details into the 'ordered' table
-            $stmt = $con->prepare("INSERT INTO ordered (user_id, product_id, quantity, price) VALUES (?, ?, ?, ?)");
+            $stmt = $con->prepare("INSERT INTO order (user_id, product_id, quantity, price) VALUES (?, ?, ?, ?)");
             $stmt->execute([$user_id, $product_id, $quantity, $price]);
         }
 
-        // Commit transaction
+
         $con->commit();
 
-        // Clear the cart after successful order placement
+
         unset($_SESSION['cart']);
 
         echo "<p>Order placed successfully!</p>";
         echo '<a href="home.php" class="btn btn-primary">Back to Home</a>';
     } catch (Exception $e) {
-        // Rollback in case of error
+
         $con->rollBack();
         echo "Failed to place order: " . $e->getMessage();
     }
