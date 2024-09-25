@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "shopping2";
+$servername = "x3ztd854gaa7on6s.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
+$username = "gishf2eqt1z2bey0";
+$password = "bihkhoffleu5f2tk";
+$dbname = "akbve430gouzs6mm";
 
 try {
     // Create a new PDO instance
