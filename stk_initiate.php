@@ -5,8 +5,8 @@ if (isset($_POST['submit'])) {
     date_default_timezone_set('Africa/Nairobi');
 
     # access token
-    $consumerKey = 'nk16Y74eSbTaGQgc9WF8j6FigApqOMWr'; //Fill with your app Consumer Key
-    $consumerSecret = '40fD1vRXCq90XFaU'; // Fill with your app Secret
+    $consumerKey = 'WfasAwVu4aRl2jLIFvMVQaODR3Q0buNUZL6hnkb18pH79Zdq'; //Fill with your app Consumer Key
+    $consumerSecret = 'GRo6SRtirOwb3G1h8YF4Uezn4Ln5qLsXrJvwU3WvRKDJeu2NVNfvJHAlPHqr8nRb'; // Fill with your app Secret
 
     # define the variales
     # provide the following details, this part is found on your test credentials on the developer account
@@ -23,10 +23,10 @@ if (isset($_POST['submit'])) {
       for developer/test accounts, this money will be reversed automatically by midnight.
     */
 
-    $PartyA = $_POST['phone']; // This is your phone number, 
+    $PartyA = $_POST['Phone']; // This is your phone number, 
     $AccountReference = '2255';
     $TransactionDesc = 'Test Payment';
-    $Amount = $_POST['amount'];
+    $Amount = $_POST['Amount'];
 
     # Get the timestamp, format YYYYmmddhms -> 20181004151020
     $Timestamp = date('YmdHis');
