@@ -40,6 +40,9 @@ $user_id = $_SESSION['user_id']; // Get the logged-in user's ID
                 <li><a href="logout.php"><i class='icon3 bx bx-log-out'></i>
                         <p>Logout</p>
                     </a></li>
+                <li><a href="admin.html"><i class='bx bxs-user-rectangle'></i> 
+                        <p>admin</p>
+                    </a></li>
             </ul>
         </nav>
     </header>
